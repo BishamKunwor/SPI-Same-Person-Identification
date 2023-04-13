@@ -1,0 +1,6 @@
+@use "sass:map";
+@import "tailwind-config-var.scss";
+
+@function getColor($colorName) {
+  @return map.get($backgroundColor, $colorName);
+}

@@ -1,0 +1,153 @@
+@use "sass:color";
+@import "./functions.scss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+
+@layer base {
+  * {
+    font-family: Inter, system-ui, sans-serif;
+    // font-family: 'Lato', sans-serif;
+  }
+}
+
+@layer components {
+  .title {
+    @apply text-primaryColor;
+  }
+  html {
+    @apply antialiased;
+  }
+}
+
+//Scss Styles
+
+.table-with-nested-data {
+  .ant-table-body {
+    tr {
+      vertical-align: baseline;
+      td:last-child {
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+// Styling for alternate table row
+.ant-table-tbody {
+  tr:nth-child(odd) {
+    background-color: color.change(getColor("disableGray"), $alpha: 0.15);
+  }
+  tr:nth-child(odd):has(.ant-table-cell-row-hover) {
+    background-color: inherit;
+  }
+  td {
+    border-top: 1px solid color.change(getColor("disableGray"), $alpha: 0.15) !important;
+  }
+  .ant-table-cell-row-hover {
+    background-color: color.change(
+      getColor("primaryColor"),
+      $alpha: 0.075
+    ) !important;
+  }
+}
+
+//       getColor("goldYellow"),
+
+// Styling for scrollbar on dashboard
+#dashboard-main {
+  .ant-table-body::-webkit-scrollbar {
+    width: 5px !important;
+    height: 6px !important;
+  }
+
+  .ant-table-body::-webkit-scrollbar-track {
+    @apply bg-bgColor;
+    border-radius: 100vh;
+    // background: #a3a0a0;
+  }
+
+  .ant-table-body::-webkit-scrollbar-thumb {
+    background: #adaaaa;
+    border-radius: 1vh;
+  }
+
+  .ant-table-body::-webkit-scrollbar-thumb:hover {
+    background: #635f5f;
+  }
+  .ant-table-body {
+    scrollbar-width: thin;
+    scrollbar-color: #5a5757 #fff;
+  }
+}
+
+.table{
+  .ant-table-body::-webkit-scrollbar {
+    width: 5px !important;
+    height: 6px !important;
+  }
+
+  .ant-table-body::-webkit-scrollbar-track {
+    @apply bg-bgColor;
+    //border-radius: 100vh;
+    // background: #a3a0a0;
+  }
+
+  .ant-table-body::-webkit-scrollbar-thumb {
+    background: #adaaaa;
+    //border-radius: 1vh;
+  }
+
+  .ant-table-body::-webkit-scrollbar-thumb:hover {
+    background: #635f5f;
+  }
+  .ant-table-body {
+    scrollbar-width: thin;
+    scrollbar-color: #5a5757 #fff;
+  }
+}
+
+// Dropdown menu from nav style starts
+.dropdownStyle {
+  .ant-dropdown-menu {
+    background-color: getColor("primaryColor") !important;
+    padding: 0.5rem !important;
+  }
+
+  .ant-dropdown-menu-item {
+    color: getColor("disableGray") !important;
+    padding: 0.5rem !important;
+  }
+
+  .ant-dropdown-menu-item:hover {
+    color: white !important;
+  }
+}
+
+// Dropdown menu ends
+
+// Document Tab Checklist styles starts
+[data-page="document-checklist"] {
+  .ant-form-item {
+    margin-bottom: 0 !important;
+  }
+}
+// Document Tab Checklist styles ends
+
+// Removing margin in antd upload photos start
+.client-docs {
+  .ant-upload-list-item-container {
+    .ant-upload-list-item {
+      margin-top: 0 !important;
+    }
+  }
+  .ant-upload-list:empty:before {
+    content: "No file chosen" !important;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    line-height: 1.4 rem;
+  }
+}
+// Removing margin in antd upload photos ends
