@@ -1,9 +1,21 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import PmsLayout from "../components/Layout";
 import PageWrapper from "../components/PageWrapper";
 import Head from "next/head";
 import Link from "next/link";
+import store from "store";
+
 export default function Home() {
+
+  useEffect(() => {
+    if (!store.get("createDematAccount")) {
+      store.set("createDematAccount", []);
+    }
+    if (!store.get("usersInfo")) {
+      store.set("usersInfo", []);
+    }
+  }, []);
+  
   const items = [
     {
       url: "/create-demat-account",

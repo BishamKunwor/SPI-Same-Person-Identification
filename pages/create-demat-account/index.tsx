@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { ReactElement } from "react";
 import PmsLayout from "../../components/Layout";
-import NewClientAccSetupComponent from "../../components/pages/ClientAccountSetup/NewClientSetup";
+import CreateDematAccount from "../../components/pages/CreateDematAccount";
 import PageWrapper from "../../components/PageWrapper";
 
 export default function NewClientSetup() {
@@ -11,7 +11,7 @@ export default function NewClientSetup() {
         <title>Create Demat Account | SPI</title>
       </Head>
       <PageWrapper>
-        <NewClientAccSetupComponent />
+        <CreateDematAccount />
       </PageWrapper>
     </>
   );

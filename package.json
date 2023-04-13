@@ -17,11 +17,13 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.57.1",
+    "store": "^2.0.12",
     "tailwindcss-export-config": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
+    "@types/store": "^2.0.2",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4",

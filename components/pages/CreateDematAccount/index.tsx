@@ -1,16 +1,16 @@
 import { Steps } from "antd";
 import { useState } from "react";
-import ClientDetailsForm from "../../../AccountSetupForm/ClientDetails";
-import FormLabel from "../../../FormLabel";
-import ClientAddressForm from "../../../AccountSetupForm/ClientAddress";
-import ClientFamilyDetailsForm from "../../../AccountSetupForm/ClientFamilyDetails";
-import ClientOccupationForm from "../../../AccountSetupForm/ClientOccupation";
-import ClientBankAccForm from "../../../AccountSetupForm/ClientBankAcc";
-import ClientReviewPage from "../../../AccountSetupForm/ClientReviewPage";
-import ClientNomineeForm from "../../../AccountSetupForm/ClientNomineeDetails";
-import ClientDocsForm from "../../../AccountSetupForm/ClientDocs";
+import ClientDetailsForm from "../../AccountSetupForm/ClientDetails";
+import FormLabel from "../../FormLabel";
+import ClientAddressForm from "../../AccountSetupForm/ClientAddress";
+import ClientFamilyDetailsForm from "../../AccountSetupForm/ClientFamilyDetails";
+import ClientOccupationForm from "../../AccountSetupForm/ClientOccupation";
+import ClientBankAccForm from "../../AccountSetupForm/ClientBankAcc";
+import ClientReviewPage from "../../AccountSetupForm/ClientReviewPage";
+import ClientNomineeForm from "../../AccountSetupForm/ClientNomineeDetails";
+import ClientDocsForm from "../../AccountSetupForm/ClientDocs";
 
-export default function NewClientAccSetupComponent() {
+export default function CreateDematAccount() {
   const [currentStep, setCurrentStep] = useState(0);
   function next() {
     setCurrentStep((prev) => prev + 1);
