@@ -7,11 +7,13 @@ interface ClientFamilyDetailsArgument {
   prev?(): void;
   next?(): void;
   calledFrom?: "review" | "edit";
+  setFamilyDetailsForm: (data: any) => void;
 }
 
 export default function ClientFamilyDetailsForm({
   prev = () => {},
   next = () => {},
+  setFamilyDetailsForm,
   calledFrom = "edit",
 }: ClientFamilyDetailsArgument) {
   const isEditable = calledFrom !== "edit";
@@ -20,6 +22,7 @@ export default function ClientFamilyDetailsForm({
       <Form
         onFinish={(data) => {
           console.log(data);
+          setFamilyDetailsForm(data);
           next();
         }}
       >

@@ -7,12 +7,14 @@ interface ClientOccupationArgs {
   prev?(): void;
   next?(): void;
   calledFrom?: "review" | "edit";
+  setOccupationForm: (data: any) => void;
 }
 
 export default function ClientOccupationForm({
   prev = () => {},
   next = () => {},
   calledFrom = "edit",
+  setOccupationForm,
 }: ClientOccupationArgs) {
   const isEditable = calledFrom !== "edit";
   return (
@@ -20,6 +22,7 @@ export default function ClientOccupationForm({
       <Form
         onFinish={(data) => {
           console.log(data);
+          setOccupationForm(data);
           next();
         }}
       >

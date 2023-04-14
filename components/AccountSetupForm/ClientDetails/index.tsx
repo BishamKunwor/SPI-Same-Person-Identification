@@ -8,11 +8,13 @@ import { useRouter } from "next/router";
 interface ClientDetailsArgument {
   next?(): void;
   calledFrom?: "review" | "edit";
+  setDeatilsTabForm: (data: any) => void;
 }
 
 export default function ClientDetailsForm({
   next = () => {},
   calledFrom = "edit",
+  setDeatilsTabForm,
 }: ClientDetailsArgument) {
   const isEditable = calledFrom !== "edit";
   const radioGroupGenderLabel = {
@@ -26,6 +28,7 @@ export default function ClientDetailsForm({
       <Form
         onFinish={(data) => {
           console.log(data);
+          setDeatilsTabForm(data);
           next();
         }}
       >
