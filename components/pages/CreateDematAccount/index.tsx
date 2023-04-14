@@ -85,7 +85,16 @@ export default function CreateDematAccount() {
     },
     {
       title: <FormLabel>Review</FormLabel>,
-      component: <ClientReviewPage prev={prev} />,
+      component: (
+        <ClientReviewPage
+          detilsTabForm={detilsTabForm}
+          addressTabForm={addressTabForm}
+          familyDetailsForm={familyDetailsForm}
+          occupationForm={occupationForm}
+          bankAccountForm={bankAccountForm}
+          prev={prev}
+        />
+      ),
     },
   ];
   return (
