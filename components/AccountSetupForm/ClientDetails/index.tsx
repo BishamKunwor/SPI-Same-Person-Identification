@@ -41,6 +41,12 @@ export default function ClientDetailsForm({
             label="First Name*"
             formItemsProps={{
               name: "firstName",
+              rules: [
+                {
+                  required: true,
+                  message: "Name Should not be empty.",
+                },
+              ],
             }}
           >
             <Input
@@ -67,6 +73,12 @@ export default function ClientDetailsForm({
             label="Last Name*"
             formItemsProps={{
               name: "lastName",
+              rules: [
+                {
+                  required: true,
+                  message: "Last Name Should not be empty.",
+                },
+              ],
             }}
           >
             <Input
@@ -81,6 +93,12 @@ export default function ClientDetailsForm({
             colProps={{ span: 8 }}
             formItemsProps={{
               name: "dateOfBirthBS",
+              rules: [
+                {
+                  required: true,
+                  message: "Date Of Birth should not be empty.",
+                },
+              ],
             }}
             label="Date of Birth (B.S)*"
           >

@@ -35,6 +35,12 @@ export default function ClientFamilyDetailsForm({
             label="Grand Father's Name*"
             formItemsProps={{
               name: "grandFatherName",
+              rules: [
+                {
+                  required: true,
+                  message: "Grand Father Name Should not be empty.",
+                },
+              ],
             }}
           >
             <Input
@@ -48,6 +54,12 @@ export default function ClientFamilyDetailsForm({
             label="Father's Name*"
             formItemsProps={{
               name: "fatherName",
+              rules: [
+                {
+                  required: true,
+                  message: "Father Name Should not be empty.",
+                },
+              ],
             }}
           >
             <Input

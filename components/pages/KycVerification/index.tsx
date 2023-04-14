@@ -8,9 +8,9 @@ import TableWrapper from "../../TableWrapper";
 export default function KycVerification() {
     const columns = [
         {
-            title: "Charge",
-            key: "charge",
-            dataIndex: "charge",
+            title: "First Name",
+            key: "firstName",
+            dataIndex: "firstName",
             render(data: string) {
                 return (
                     <div className="font-[500] text-sm text-primaryColor">{data}</div>
@@ -18,9 +18,9 @@ export default function KycVerification() {
             },
         },
         {
-            title: "Type",
-            key: "type",
-            dataIndex: "type",
+            title: "Middle Name",
+            key: "middleName",
+            dataIndex: "middleName",
             render(data: string) {
                 return (
                     <div className="font-[500] text-sm text-primaryColor">{data}</div>
@@ -28,9 +28,39 @@ export default function KycVerification() {
             },
         },
         {
-            title: "Status",
-            key: "status",
-            dataIndex: "status",
+            title: "Last Name",
+            key: "lastName",
+            dataIndex: "lastName",
+            render(data: string) {
+                return (
+                    <div className="font-[500] text-sm text-primaryColor">{data}</div>
+                );
+            },
+        },
+        {
+            title: "DOB",
+            key: "dateOfBirthBS",
+            dataIndex: "dateOfBirthBS",
+            render(data: string) {
+                return (
+                    <div className="font-[500] text-sm text-primaryColor">{data}</div>
+                );
+            },
+        },
+        {
+            title: "Father Name",
+            key: "fatherName",
+            dataIndex: "fatherName",
+            render(data: string) {
+                return (
+                    <div className="font-[500] text-sm text-primaryColor">{data}</div>
+                );
+            },
+        },
+        {
+            title: "Grand Father Name",
+            key: "grandFatherName",
+            dataIndex: "grandFatherName",
             render(data: string) {
                 return (
                     <div className="font-[500] text-sm text-primaryColor">{data}</div>
