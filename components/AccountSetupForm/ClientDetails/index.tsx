@@ -1,4 +1,4 @@
-import { DatePicker, Form, Input, Radio, Row, Select } from "antd";
+import { Button, DatePicker, Form, Input, Radio, Row, Select } from "antd";
 import AccSetupFormHeading from "../../AccSetupFormHeading";
 import FormItemWrapper from "../../FormItemWrapper";
 import FormLabel from "../../FormLabel";
@@ -33,30 +33,54 @@ export default function ClientDetailsForm({
           Personal Details
         </AccSetupFormHeading>
         <Row gutter={[48, 0]}>
-          <FormItemWrapper colProps={{ span: 8 }} label="First Name*">
+          <FormItemWrapper
+            colProps={{ span: 8 }}
+            label="First Name*"
+            formItemsProps={{
+              name: "firstName",
+            }}
+          >
             <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
             />
           </FormItemWrapper>
-          <FormItemWrapper colProps={{ span: 8 }} label="Middle Name">
+          <FormItemWrapper
+            colProps={{ span: 8 }}
+            formItemsProps={{
+              name: "middleName",
+            }}
+            label="Middle Name"
+          >
             <Input
               disabled={isEditable}
               size="large"
-              placeholder="Enter your first name"
+              placeholder="Enter your middle name"
             />
           </FormItemWrapper>
-          <FormItemWrapper colProps={{ span: 8 }} label="Last Name*">
+          <FormItemWrapper
+            colProps={{ span: 8 }}
+            label="Last Name*"
+            formItemsProps={{
+              name: "lastName",
+            }}
+          >
             <Input
               disabled={isEditable}
               size="large"
-              placeholder="Enter your first name"
+              placeholder="Enter your last name"
             />
           </FormItemWrapper>
         </Row>
         <Row gutter={[48, 0]}>
-          <FormItemWrapper colProps={{ span: 8 }} label="Date of Birth (B.S)*">
+          <FormItemWrapper
+            colProps={{ span: 8 }}
+            formItemsProps={{
+              name: "dateOfBirthBS",
+            }}
+            label="Date of Birth (B.S)*"
+          >
             <DatePicker
               disabled={isEditable}
               className="w-full"
@@ -64,7 +88,13 @@ export default function ClientDetailsForm({
               placeholder="Enter your first name"
             />
           </FormItemWrapper>
-          <FormItemWrapper colProps={{ span: 8 }} label="Date of Birth (A.D)*">
+          <FormItemWrapper
+            colProps={{ span: 8 }}
+            formItemsProps={{
+              name: "dateOfBithAD",
+            }}
+            label="Date of Birth (A.D)*"
+          >
             <DatePicker
               disabled={isEditable}
               className="w-full"
@@ -75,6 +105,9 @@ export default function ClientDetailsForm({
           <FormItemWrapper
             colProps={{ span: 8 }}
             label="Educational Qualification*"
+            formItemsProps={{
+              name: "educationQualification",
+            }}
           >
             <Select
               disabled={isEditable}
@@ -90,6 +123,7 @@ export default function ClientDetailsForm({
             colProps={{ span: 8 }}
             formItemsProps={{
               rules: [{ required: true, message: "Not empty" }],
+              name: "gender",
             }}
           >
             <Radio.Group
@@ -125,6 +159,7 @@ export default function ClientDetailsForm({
             colProps={{ span: 8 }}
             formItemsProps={{
               rules: [{ required: true, message: "Not empty" }],
+              name: "nationality",
             }}
           >
             <Radio.Group
@@ -147,11 +182,12 @@ export default function ClientDetailsForm({
             </Radio.Group>
           </FormItemWrapper>
           <FormItemWrapper
-            label="Gender*"
+            label="Marital Status*"
             labelAlignment="vertical"
             colProps={{ span: 8 }}
             formItemsProps={{
               rules: [{ required: true, message: "Not empty" }],
+              name: "maritalStatus",
             }}
           >
             <Radio.Group
@@ -183,7 +219,7 @@ export default function ClientDetailsForm({
         <AccSetupFormHeading className="mb-6">
           Identity Proof Details
         </AccSetupFormHeading>
-        <Row gutter={[48, 0]}>
+        {/* <Row gutter={[48, 0]}>
           <FormItemWrapper
             labelAlignment="vertical"
             colProps={{ span: 8 }}
@@ -210,23 +246,55 @@ export default function ClientDetailsForm({
               </div>
             </Radio.Group>
           </FormItemWrapper>
-        </Row>
+        </Row> */}
         <Row gutter={[48, 0]}>
-          <FormItemWrapper colProps={{ span: 8 }} label="Citizenship No.*">
+          <FormItemWrapper
+            colProps={{ span: 8 }}
+            label="Citizenship No.*"
+            formItemsProps={{
+              name: "citizenshipNo",
+            }}
+          >
             <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
             />
           </FormItemWrapper>
-          <FormItemWrapper colProps={{ span: 8 }} label="Issue District">
+          <FormItemWrapper
+            colProps={{ span: 8 }}
+            label="Issue District"
+            formItemsProps={{
+              name: "issueDistrict",
+            }}
+          >
             <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
             />
           </FormItemWrapper>
-          <FormItemWrapper colProps={{ span: 4 }} label="Issue Date (A.D)*">
+          {/* <FormItemWrapper
+            colProps={{ span: 4 }}
+            label="Issue Date (A.D)*"
+            formItemsProps={{
+              name: "issueDate",
+            }}
+          >
+            <DatePicker
+              disabled={isEditable}
+              className="w-full"
+              size="large"
+              placeholder="Enter your first name"
+            />
+          </FormItemWrapper> */}
+          <FormItemWrapper
+            colProps={{ span: 6 }}
+            label="Issue Date (B.S.)*"
+            formItemsProps={{
+              name: "issueDate",
+            }}
+          >
             <DatePicker
               disabled={isEditable}
               className="w-full"
@@ -234,16 +302,8 @@ export default function ClientDetailsForm({
               placeholder="Enter your first name"
             />
           </FormItemWrapper>
-          <FormItemWrapper colProps={{ span: 4 }} label="Issue Date (B.S.)*">
-            <DatePicker
-              disabled={isEditable}
-              className="w-full"
-              size="large"
-              placeholder="Enter your first name"
-            />
-          </FormItemWrapper>
         </Row>
-        <Row gutter={[48, 0]}>
+        {/* <Row gutter={[48, 0]}>
           <FormItemWrapper colProps={{ span: 8 }} label="Passport Number*">
             <Input
               disabled={isEditable}
@@ -274,7 +334,7 @@ export default function ClientDetailsForm({
               placeholder="Enter your first name"
             />
           </FormItemWrapper>
-        </Row>
+        </Row> */}
         {!isEditable && (
           <div className="mt-6">
             <PageBottomButtons

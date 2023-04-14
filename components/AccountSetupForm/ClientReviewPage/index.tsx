@@ -4,7 +4,7 @@ import ClientAddressForm from "../ClientAddress"
 import ClientBankAccForm from "../ClientBankAcc"
 import ClientDetailsForm from "../ClientDetails"
 import ClientFamilyDetailsForm from "../ClientFamilyDetails"
-import ClientNomineeForm from "../ClientNomineeDetails"
+// import ClientNomineeForm from "../ClientNomineeDetails"
 import ClientOccupationForm from "../ClientOccupation"
 
 interface ClientReviewPageArgs {
@@ -20,7 +20,7 @@ export default function ClientReviewPage({ prev }: ClientReviewPageArgs) {
         <ClientFamilyDetailsForm calledFrom="review" />
         <ClientOccupationForm calledFrom="review" />
         <ClientBankAccForm calledFrom="review" />
-        <ClientNomineeForm calledFrom="review" />
+        {/* <ClientNomineeForm calledFrom="review" /> */}
         <div className="mt-6">
             <PageBottomButtons
                 cancelBtnProps={{ loading: false, onClick: () => { prev() } }}

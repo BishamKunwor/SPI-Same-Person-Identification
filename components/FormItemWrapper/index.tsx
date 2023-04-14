@@ -3,12 +3,12 @@ import InputFieldWrapper from "../InputFieldWrapper";
 
 // Children contains Form element (Input, select). Label is for input label and use labelAlignment for top or side-by-side alignment of label with input type
 interface FormItemWrapperProps {
-  children?: JSX.Element,
-  formItemsProps?: any,
-  label?: string,
-  labelAlignment?: "vertical" | "horizontal",
-  colProps?: any,
-  isDisabled?: boolean
+  children?: JSX.Element;
+  formItemsProps?: any;
+  label?: string;
+  labelAlignment?: "vertical" | "horizontal";
+  colProps?: any;
+  isDisabled?: boolean;
 }
 export default function FormItemWrapper({
   children,

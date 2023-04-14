@@ -7,7 +7,7 @@ import ClientFamilyDetailsForm from "../../AccountSetupForm/ClientFamilyDetails"
 import ClientOccupationForm from "../../AccountSetupForm/ClientOccupation";
 import ClientBankAccForm from "../../AccountSetupForm/ClientBankAcc";
 import ClientReviewPage from "../../AccountSetupForm/ClientReviewPage";
-import ClientNomineeForm from "../../AccountSetupForm/ClientNomineeDetails";
+// import ClientNomineeForm from "../../AccountSetupForm/ClientNomineeDetails";
 import ClientDocsForm from "../../AccountSetupForm/ClientDocs";
 
 export default function CreateDematAccount() {
@@ -39,10 +39,10 @@ export default function CreateDematAccount() {
       title: <FormLabel>Bank Account</FormLabel>,
       component: <ClientBankAccForm prev={prev} next={next} />,
     },
-    {
-      title: <FormLabel>Nominee</FormLabel>,
-      component: <ClientNomineeForm prev={prev} next={next} />,
-    },
+    // {
+    //   title: <FormLabel>Nominee</FormLabel>,
+    //   component: <ClientNomineeForm prev={prev} next={next} />,
+    // },
     {
       title: <FormLabel>Documents</FormLabel>,
       component: <ClientDocsForm prev={prev} next={next} />,
