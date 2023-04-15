@@ -7,11 +7,93 @@ import store from "store";
 
 export default function Home() {
   useEffect(() => {
+    const data = {
+      accountNo: "1",
+      bankName: "2",
+      branchName: "3",
+      occupation: "1",
+      panNo: "2",
+      natureOfBusiness: "3",
+      organizationName: "4",
+      organizationAddress: "5",
+      designation: "6",
+      employeeId: "7",
+      annualIncome: "8",
+      grandFatherName: "Udaya Bahadur Kunwor",
+      fatherName: "Ramesh Kunwor",
+      motherName: "Junita Kunwor",
+      telephoneNo: "0144166467",
+      mobileNo: "9817843217",
+      email: "bisham.kunwor@smtmcapital.com",
+      country: "Nepal",
+      province: "Bagmati",
+      district: "Sindhuli",
+      gaupalikaNagarpalika: "Kamalamai",
+      wardNo: "6",
+      tole: "Ratamata",
+      houseNo: "05",
+      firstName: "Bisham",
+      lastName: "Kunwor",
+      dateOfBirthBS: "2023-04-01T12:36:03.644Z",
+      dateOfBithAD: "2023-04-02T12:36:05.728Z",
+      educationQualification: "Bachelor",
+      gender: "male",
+      nationality: "male",
+      maritalStatus: "male",
+      citizenshipNo: "1234",
+      issueDistrict: "Sindhuli",
+      issueDate: "2023-04-03T12:36:15.261Z",
+    };
+    const database = [];
+    const names = [
+      {
+        firstName: "Manisha",
+        lastName: "Kunwor",
+      },
+      {
+        firstName: "Anisha",
+        lastName: "Kunwor",
+      },
+      {
+        firstName: "Birendra",
+        lastName: "Kunwor",
+      },
+      {
+        firstName: "Sagar",
+        lastName: "Thapa",
+      },
+      {
+        firstName: "Anish",
+        lastName: "Thapa",
+      },
+      {
+        firstName: "Peter",
+        lastName: "Parker",
+      },
+      {
+        firstName: "Peter",
+        lastName: "Griffin",
+      },
+      {
+        firstName: "Ramesh",
+        lastName: "Kunwor",
+      },
+      {
+        firstName: "Ayush",
+        lastName: "Thapa",
+      },
+    ];
+    database.push(data);
+    for (let nameChangedData of names) {
+      const newData = { ...data, ...nameChangedData };
+      database.push(newData);
+    }
+    console.log(database);
     if (!store.get("createDematAccount")) {
       store.set("createDematAccount", []);
     }
     if (!store.get("usersInfo")) {
-      store.set("usersInfo", []);
+      store.set("usersInfo", database);
     }
   }, []);
 

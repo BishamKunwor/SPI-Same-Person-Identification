@@ -11,7 +11,7 @@ export default function KycVerification() {
   const [showUserDetailsModal, setShowUserDetailsModal] = useState(false);
   const [activeUserDetails, setActiveUserDetails] = useState({});
   useEffect(() => {
-    console.log("useeffect runned")
+    console.log("useeffect runned");
     const createDematStoreData = store.get("createDematAccount");
     if (Object.keys(createDematStoreData).length > 0) {
       if (dataSource.length === 0) {
@@ -129,7 +129,14 @@ export default function KycVerification() {
                 },
               }}
             >
-              <Button type="primary">Run SPI Check</Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  console.log(record);
+                }}
+              >
+                Run SPI Check
+              </Button>
             </ConfigProvider>
           </div>
         );
