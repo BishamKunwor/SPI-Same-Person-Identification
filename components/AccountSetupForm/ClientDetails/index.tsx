@@ -274,6 +274,7 @@ export default function ClientDetailsForm({
             label="Citizenship No.*"
             formItemsProps={{
               name: "citizenshipNo",
+              rules:[{required:true, message: "Citizenship No. should not be empty."}]
             }}
           >
             <Input
