@@ -5,13 +5,13 @@ import store from "store";
 import ClientReviewPage from "../../AccountSetupForm/ClientReviewPage";
 import moment from "moment";
 import NormalBtn from "../../Btn/BtnNormal";
+import SpiChecker from "../../../spi-core";
 
 export default function KycVerification() {
   const [dataSource, setDataSource] = useState([]);
   const [showUserDetailsModal, setShowUserDetailsModal] = useState(false);
   const [activeUserDetails, setActiveUserDetails] = useState({});
   useEffect(() => {
-    console.log("useeffect runned");
     const createDematStoreData = store.get("createDematAccount");
     if (Object.keys(createDematStoreData).length > 0) {
       if (dataSource.length === 0) {
@@ -132,7 +132,8 @@ export default function KycVerification() {
               <Button
                 type="primary"
                 onClick={() => {
-                  console.log(record);
+                  // console.log(record);
+                  SpiChecker(record);
                 }}
               >
                 Run SPI Check

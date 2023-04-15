@@ -1,3 +1,5 @@
+import store from "store";
+
 function levenshteinDistance(str1: string, str2: string): number {
   const len1 = str1.length;
   const len2 = str2.length;
@@ -37,4 +39,33 @@ export function similarityPercentage(str1: string, str2: string): number {
   const maxLength = Math.max(str1.length, str2.length);
   const similarity = 1 - distance / maxLength;
   return parseFloat((similarity * 100).toFixed(2));
+}
+
+export default function SpiChecker(record: any) {
+  const usersInfoDb = store.get("usersInfo") || [];
+  const similarUserList = [];
+  for (let users of usersInfoDb) {
+    const similarUser: any = {
+      suspectedRecord: {},
+      percentage: [],
+    };
+    for (let key in record) {
+      if (key in users) {
+        similarUser.percentage.push(
+          similarityPercentage(record[key], users[key])
+        );
+      }
+    }
+    // console.log(similarUser);
+    let sum = 0;
+    for (let item of similarUser.percentage) {
+      sum += item;
+    }
+    similarUser.percentage = Math.round(sum / similarUser.percentage.length);
+    similarUser.suspectedRecord = { ...users };
+    if (similarUser.percentage > 60) {
+      similarUserList.push(similarUser);
+    }
+  }
+  return similarUserList;
 }
