@@ -11,6 +11,8 @@ export default function KycVerification() {
   const [dataSource, setDataSource] = useState([]);
   const [showUserDetailsModal, setShowUserDetailsModal] = useState(false);
   const [activeUserDetails, setActiveUserDetails] = useState({});
+  const [activeSpiUserDetails, setActiveSpiUserDetails] = useState({});
+  const [showSpiDiffModel, setShowSpiDiffModel] = useState(false);
   const [spiData, setSpiData] = useState([]);
   const [showAllUserModal, setShowAllUserModal] = useState(false);
   const [allDbData, setAllDbData] = useState([]);
@@ -256,10 +258,103 @@ export default function KycVerification() {
         return <div className="text-sm text-red-500 font-bold">{data}</div>;
       },
     },
+    {
+      title: "Action",
+      key: "action",
+      dataIndex: "action",
+      render: (_: any, record: any) => {
+        return (
+          <div className="flex gap-4 flex-wrap">
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: "#E15562",
+                },
+              }}
+            >
+              <Button
+                type="primary"
+                onClick={() => {
+                  setActiveSpiUserDetails(record.suspectedRecord);
+                  setShowSpiDiffModel(true);
+                }}
+              >
+                View Diff
+              </Button>
+            </ConfigProvider>
+          </div>
+        );
+      },
+    },
   ];
 
   return (
     <>
+      <Modal
+        open={showSpiDiffModel}
+        onCancel={() => setShowSpiDiffModel(false)}
+        footer={false}
+        width={1300}
+      >
+        <div className="grid gap-8 grid-cols-2">
+          <div className="overflow-scroll h-[920px]">
+            <div className="font-bold text-xl my-4 text-red-500">
+              Matched Result
+            </div>
+            <div className="my-4 space-y-4">
+              <div className="">
+                <img
+                  className="h-48 w-48 border"
+                  src={activeSpiUserDetails.passportSizePhoto}
+                  alt=""
+                />
+                <div className="mt-2 font-semibold">Passport Size Photo</div>
+              </div>
+              <div className="">
+                <img
+                  className="h-48 w-48 border"
+                  src={activeSpiUserDetails.passportSizePhoto}
+                  alt=""
+                />
+                <div className="mt-2 font-semibold">Signature</div>
+              </div>
+            </div>
+            <ClientReviewPage
+              calledFrom="review"
+              formData={activeSpiUserDetails}
+              setFormData={() => {}}
+            />
+          </div>
+          <div className="overflow-scroll h-[920px]">
+            <div className="font-bold text-xl my-4 text-red-500">
+              KYC Verification Pending User
+            </div>
+            <div className="my-4 space-y-4">
+              <div className="">
+                <img
+                  className="h-48 w-48 border"
+                  src={activeUserDetails.passportSizePhoto}
+                  alt=""
+                />
+                <div className="mt-2 font-semibold">Passport Size Photo</div>
+              </div>
+              <div className="">
+                <img
+                  className="h-48 w-48 border"
+                  src={activeUserDetails.passportSizePhoto}
+                  alt=""
+                />
+                <div className="mt-2 font-semibold">Signature</div>
+              </div>
+            </div>
+            <ClientReviewPage
+              calledFrom="review"
+              formData={activeUserDetails}
+              setFormData={() => {}}
+            />
+          </div>
+        </div>
+      </Modal>
       <div className="flex justify-end items-center">
         <Button
           type="primary"

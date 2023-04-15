@@ -45,10 +45,12 @@ export default function ClientBankAccForm({
         }}
       >
         <AccSetupFormHeading className="mb-4">Bank Details</AccSetupFormHeading>
-        <FormLabel>
-          Your provided bank details will be used to trasfer returns of your
-          investment at end of stated period of Portfolio Management Service.
-        </FormLabel>
+        {!isEditable && (
+          <FormLabel>
+            Your provided bank details will be used to trasfer returns of your
+            investment at end of stated period of Portfolio Management Service.
+          </FormLabel>
+        )}
         <div className="mt-6"></div>
         {/* <Row gutter={[48, 0]}>
           <Col>
