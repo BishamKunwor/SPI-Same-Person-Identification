@@ -12,11 +12,12 @@ import ClientDocsForm from "../../AccountSetupForm/ClientDocs";
 
 export default function CreateDematAccount() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [detilsTabForm, setDeatilsTabForm] = useState({});
-  const [addressTabForm, setAddressTabForm] = useState({});
-  const [familyDetailsForm, setFamilyDetailsForm] = useState({});
-  const [occupationForm, setOccupationForm] = useState({});
-  const [bankAccountForm, setBankAccountForm] = useState({});
+  const [formData, setFormData] = useState({});
+  // const [detilsTabForm, setDeatilsTabForm] = useState({});
+  // const [addressTabForm, setAddressTabForm] = useState({});
+  // const [familyDetailsForm, setFamilyDetailsForm] = useState({});
+  // const [occupationForm, setOccupationForm] = useState({});
+  // const [bankAccountForm, setBankAccountForm] = useState({});
 
   useEffect(() => {
     // console.log(detilsTabForm, "details");
@@ -32,14 +33,19 @@ export default function CreateDematAccount() {
     {
       title: <FormLabel>Details</FormLabel>,
       component: (
-        <ClientDetailsForm setDeatilsTabForm={setDeatilsTabForm} next={next} />
+        <ClientDetailsForm
+          formData={formData}
+          setFormData={setFormData}
+          next={next}
+        />
       ),
     },
     {
       title: <FormLabel>Address</FormLabel>,
       component: (
         <ClientAddressForm
-          setAddressTabForm={setAddressTabForm}
+          formData={formData}
+          setFormData={setFormData}
           prev={prev}
           next={next}
         />
@@ -49,7 +55,8 @@ export default function CreateDematAccount() {
       title: <FormLabel>Family Details</FormLabel>,
       component: (
         <ClientFamilyDetailsForm
-          setFamilyDetailsForm={setFamilyDetailsForm}
+          formData={formData}
+          setFormData={setFormData}
           prev={prev}
           next={next}
         />
@@ -59,7 +66,8 @@ export default function CreateDematAccount() {
       title: <FormLabel>Occupation</FormLabel>,
       component: (
         <ClientOccupationForm
-          setOccupationForm={setOccupationForm}
+          formData={formData}
+          setFormData={setFormData}
           prev={prev}
           next={next}
         />
@@ -69,7 +77,8 @@ export default function CreateDematAccount() {
       title: <FormLabel>Bank Account</FormLabel>,
       component: (
         <ClientBankAccForm
-          setBankAccountForm={setBankAccountForm}
+          formData={formData}
+          setFormData={setFormData}
           prev={prev}
           next={next}
         />
@@ -87,11 +96,8 @@ export default function CreateDematAccount() {
       title: <FormLabel>Review</FormLabel>,
       component: (
         <ClientReviewPage
-          detilsTabForm={detilsTabForm}
-          addressTabForm={addressTabForm}
-          familyDetailsForm={familyDetailsForm}
-          occupationForm={occupationForm}
-          bankAccountForm={bankAccountForm}
+          formData={formData}
+          setFormData={setFormData}
           prev={prev}
         />
       ),

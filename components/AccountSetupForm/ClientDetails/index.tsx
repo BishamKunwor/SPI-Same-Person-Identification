@@ -8,13 +8,15 @@ import { useRouter } from "next/router";
 interface ClientDetailsArgument {
   next?(): void;
   calledFrom?: "review" | "edit";
-  setDeatilsTabForm: (data: any) => void;
+  setFormData: (data: any) => void;
+  formData: any;
 }
 
 export default function ClientDetailsForm({
   next = () => {},
   calledFrom = "edit",
-  setDeatilsTabForm,
+  setFormData,
+  formData,
 }: ClientDetailsArgument) {
   const isEditable = calledFrom !== "edit";
   const radioGroupGenderLabel = {
@@ -28,7 +30,7 @@ export default function ClientDetailsForm({
       <Form
         onFinish={(data) => {
           console.log(data);
-          setDeatilsTabForm(data);
+          setFormData({ ...data, ...formData });
           next();
         }}
       >
@@ -274,7 +276,12 @@ export default function ClientDetailsForm({
             label="Citizenship No.*"
             formItemsProps={{
               name: "citizenshipNo",
-              rules:[{required:true, message: "Citizenship No. should not be empty."}]
+              rules: [
+                {
+                  required: true,
+                  message: "Citizenship No. should not be empty.",
+                },
+              ],
             }}
           >
             <Input

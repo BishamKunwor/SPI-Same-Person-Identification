@@ -8,14 +8,16 @@ interface ClientBankAccArgs {
   prev?(): void;
   next?(): void;
   calledFrom?: "review" | "edit";
-  setBankAccountForm: (data: any) => void;
+  setFormData: (data: any) => void;
+  formData: any;
 }
 
 export default function ClientBankAccForm({
   prev = () => {},
   next = () => {},
   calledFrom = "edit",
-  setBankAccountForm,
+  setFormData,
+  formData,
 }: ClientBankAccArgs) {
   const isEditable = calledFrom !== "edit";
   return (
@@ -23,7 +25,7 @@ export default function ClientBankAccForm({
       <Form
         onFinish={(data) => {
           console.log(data);
-          setBankAccountForm(data);
+          setFormData({ ...data, ...formData });
           next();
         }}
       >

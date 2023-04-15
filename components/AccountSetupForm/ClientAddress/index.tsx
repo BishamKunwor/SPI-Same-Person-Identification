@@ -7,14 +7,16 @@ interface ClientAddressArguments {
   prev?(): void;
   next?(): void;
   calledFrom?: "review" | "edit";
-  setAddressTabForm: (data: any) => void;
+  setFormData: (data: any) => void;
+  formData: any;
 }
 
 export default function ClientAddressForm({
   prev = () => {},
   next = () => {},
   calledFrom = "edit",
-  setAddressTabForm,
+  setFormData,
+  formData,
 }: ClientAddressArguments) {
   const isEditable = calledFrom !== "edit";
   return (
@@ -22,7 +24,7 @@ export default function ClientAddressForm({
       <Form
         onFinish={(data) => {
           console.log(data);
-          setAddressTabForm(data);
+          setFormData({ ...data, ...formData });
           next();
         }}
       >

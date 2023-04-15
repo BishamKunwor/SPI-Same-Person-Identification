@@ -13,15 +13,14 @@ import { useRouter } from "next/router";
 
 interface ClientReviewPageArgs {
   prev(): void;
+  formData: any;
+  setFormData: (data: any) => void;
 }
 
 export default function ClientReviewPage({
   prev,
-  detilsTabForm,
-  addressTabForm,
-  familyDetailsForm,
-  occupationForm,
-  bankAccountForm,
+  formData,
+  setFormData,
 }: ClientReviewPageArgs) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -30,16 +29,9 @@ export default function ClientReviewPage({
       <Form
         onFinish={() => {
           setLoading(true);
-          const newElement = {
-            ...detilsTabForm,
-            ...addressTabForm,
-            ...familyDetailsForm,
-            ...occupationForm,
-            ...bankAccountForm,
-          };
-          if (Object.keys(newElement).length > 10) {
+          if (Object.keys(formData).length > 10) {
             const createDematAccountStoreData = store.get("createDematAccount");
-            createDematAccountStoreData.push(newElement);
+            createDematAccountStoreData.push({ ...formData });
             store.set("createDematAccount", createDematAccountStoreData);
             setTimeout(() => {
               router.push("/success-account-creation");
@@ -47,7 +39,7 @@ export default function ClientReviewPage({
           } else {
             message.error("Please Fill more forms. Not Enough Data Collected.");
           }
-          console.log(newElement);
+          console.log(formData);
           setLoading(false);
         }}
       >
@@ -55,12 +47,32 @@ export default function ClientReviewPage({
           Review Details and Submit Your Application
         </AccSetupFormHeading>
         <div className="mt-6"></div>
-        <ClientDetailsForm calledFrom="review" />
-        <ClientAddressForm calledFrom="review" />
-        <ClientFamilyDetailsForm calledFrom="review" />
-        <ClientOccupationForm calledFrom="review" />
-        <ClientBankAccForm calledFrom="review" />
-        {/* <ClientNomineeForm calledFrom="review" /> */}
+        <ClientDetailsForm
+          formData={formData}
+          setFormData={setFormData}
+          calledFrom="review"
+        />
+        <ClientAddressForm
+          formData={formData}
+          setFormData={setFormData}
+          calledFrom="review"
+        />
+        <ClientFamilyDetailsForm
+          formData={formData}
+          setFormData={setFormData}
+          calledFrom="review"
+        />
+        <ClientOccupationForm
+          formData={formData}
+          setFormData={setFormData}
+          calledFrom="review"
+        />
+        <ClientBankAccForm
+          formData={formData}
+          setFormData={setFormData}
+          calledFrom="review"
+        />
+        {/* <ClientNomineeForm formData={formData} setFormData={setFormData} calledFrom="review" /> */}
         <div className="mt-6">
           <PageBottomButtons
             cancelBtnProps={{
