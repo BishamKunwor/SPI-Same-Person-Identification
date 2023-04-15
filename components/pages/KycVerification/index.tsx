@@ -11,6 +11,8 @@ export default function KycVerification() {
   const [dataSource, setDataSource] = useState([]);
   const [showUserDetailsModal, setShowUserDetailsModal] = useState(false);
   const [activeUserDetails, setActiveUserDetails] = useState({});
+  const [spiData, setSpiData] = useState([]);
+
   useEffect(() => {
     const createDematStoreData = store.get("createDematAccount");
     if (Object.keys(createDematStoreData).length > 0) {
@@ -133,7 +135,7 @@ export default function KycVerification() {
                 type="primary"
                 onClick={() => {
                   // console.log(record);
-                  SpiChecker(record);
+                  setSpiData(SpiChecker(record) as []);
                 }}
               >
                 Run SPI Check
@@ -144,15 +146,93 @@ export default function KycVerification() {
       },
     },
   ];
-  // const datasource = [];
-  // for (let i = 0; i < 8; i++) {
-  //     datasource.push({
-  //         key: i * i,
-  //         charge: "Entry Management Fee",
-  //         type: "Percentage",
-  //         status: "Approved",
-  //     });
-  // }
+
+  const spiTableColumn = [
+    {
+      title: "First Name",
+      key: "firstName",
+      dataIndex: "firstName",
+      render(data: string, record: any) {
+        return (
+          <div className="font-[500] text-sm text-primaryColor">
+            {record.suspectedRecord.firstName}
+          </div>
+        );
+      },
+    },
+
+    {
+      title: "Last Name",
+      key: "lastName",
+      dataIndex: "lastName",
+      render(data: string, record: any) {
+        return (
+          <div className="font-[500] text-sm text-primaryColor">
+            {record.suspectedRecord.lastName}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Citizenship No.",
+      key: "citizenshipNo",
+      dataIndex: "citizenshipNo",
+      render(data: string, record: any) {
+        return (
+          <div className="font-[500] text-sm text-primaryColor">
+            {record.suspectedRecord.citizenshipNo}
+          </div>
+        );
+      },
+    },
+    {
+      title: "DOB",
+      key: "dateOfBirthBS",
+      dataIndex: "dateOfBirthBS",
+      render(data: string, record: any) {
+        return (
+          <div className="font-[500] text-sm text-primaryColor">
+            {moment(record.suspectedRecord.dateOfBirthBS).format("YYYY-MM-DD")}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Father Name",
+      key: "fatherName",
+      dataIndex: "fatherName",
+      render(data: string, record: any) {
+        return (
+          <div className="font-[500] text-sm text-primaryColor">
+            {record.suspectedRecord.fatherName}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Grand Father Name",
+      key: "grandFatherName",
+      dataIndex: "grandFatherName",
+      render(data: string, record: any) {
+        console.log(record);
+        return (
+          <div className="font-[500] text-sm text-primaryColor">
+            {record.suspectedRecord.grandFatherName}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Matched Accuracy",
+      key: "percentage",
+      dataIndex: "percentage",
+      render(data: string, record: any) {
+        console.log(record);
+        return <div className="text-sm text-red-500 font-bold">{data}</div>;
+      },
+    },
+  ];
+
   return (
     <>
       <div className="flex justify-end items-center">
@@ -162,7 +242,7 @@ export default function KycVerification() {
       </div>
       <div className="pt-8 flex flex-col space-y-4">
         <div className="flex justify-between">
-          <div className="text-lg font-bold text-black/80">Verify KYC Form</div>
+          <div className="text-xl font-bold text-black/80">Verify KYC Form</div>
           {/* <Col span={4}>
             <Input prefix={magnifyingGlassIcon} />
           </Col> */}
@@ -208,6 +288,14 @@ export default function KycVerification() {
           setFormData={() => {}}
         />
       </Modal>
+      {spiData.length > 0 && (
+        <div className="">
+          <div className="text-xl text-red-500 font-bold mt-12 mb-4">
+            Matched Users Info
+          </div>
+          <TableWrapper columns={spiTableColumn} dataSource={spiData} />
+        </div>
+      )}
     </>
   );
 }
