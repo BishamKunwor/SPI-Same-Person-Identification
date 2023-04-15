@@ -50,7 +50,14 @@ export default function SpiChecker(record: any) {
       percentage: [],
     };
     for (let key in record) {
-      if (key in users) {
+      if (
+        key in users &&
+        key !== "applicantSignature" &&
+        key !== "applicantThumb" &&
+        key !== "citizenshipBack" &&
+        key != "citizenshipFront" &&
+        key !== "passportSizePhoto"
+      ) {
         similarUser.percentage.push(
           similarityPercentage(record[key], users[key])
         );

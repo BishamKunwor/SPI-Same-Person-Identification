@@ -90,7 +90,14 @@ export default function CreateDematAccount() {
     // },
     {
       title: <FormLabel>Documents</FormLabel>,
-      component: <ClientDocsForm prev={prev} next={next} />,
+      component: (
+        <ClientDocsForm
+          formData={formData}
+          setFormData={setFormData}
+          prev={prev}
+          next={next}
+        />
+      ),
     },
     {
       title: <FormLabel>Review</FormLabel>,
