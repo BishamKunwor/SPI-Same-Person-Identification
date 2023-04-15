@@ -2,6 +2,8 @@ import { Form, Input, Row, Select } from "antd";
 import FormItemWrapper from "../../FormItemWrapper";
 import FormLabel from "../../FormLabel";
 import PageBottomButtons from "../../PageBottomButtons";
+import { useEffect } from "react";
+import moment from "moment";
 
 interface ClientOccupationArgs {
   prev?(): void;
@@ -19,6 +21,18 @@ export default function ClientOccupationForm({
   formData,
 }: ClientOccupationArgs) {
   const isEditable = calledFrom !== "edit";
+  const [form] = Form.useForm();
+  useEffect(() => {
+    if (Object.keys(formData).length > 0) {
+      for (let data in form.getFieldsValue()) {
+        if (data.toLocaleLowerCase().includes("date")) {
+          form.setFieldValue(data, moment(formData[data]));
+        } else {
+          form.setFieldValue(data, formData[data]);
+        }
+      }
+    }
+  }, []);
   return (
     <>
       <Form
@@ -65,7 +79,7 @@ export default function ClientOccupationForm({
               name: "natureOfBusiness",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
@@ -78,7 +92,7 @@ export default function ClientOccupationForm({
               name: "organizationName",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
@@ -91,7 +105,7 @@ export default function ClientOccupationForm({
               name: "organizationAddress",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"

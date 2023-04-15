@@ -4,6 +4,8 @@ import FormItemWrapper from "../../FormItemWrapper";
 import FormLabel from "../../FormLabel";
 import PageBottomButtons from "../../PageBottomButtons";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import moment from "moment";
 
 interface ClientDetailsArgument {
   next?(): void;
@@ -25,9 +27,22 @@ export default function ClientDetailsForm({
     others: "others",
   };
   const router = useRouter();
+  const [form] = Form.useForm();
+  useEffect(() => {
+    if (Object.keys(formData).length > 0) {
+      for (let data in form.getFieldsValue()) {
+        if (data.toLocaleLowerCase().includes("date")) {
+          form.setFieldValue(data, moment(formData[data]));
+        } else {
+          form.setFieldValue(data, formData[data]);
+        }
+      }
+    }
+  }, []);
   return (
     <>
       <Form
+        form={form}
         onFinish={(data) => {
           console.log(data);
           setFormData({ ...data, ...formData });
@@ -37,6 +52,7 @@ export default function ClientDetailsForm({
         <AccSetupFormHeading className="mb-4">
           Personal Details
         </AccSetupFormHeading>
+        {/* <DatePicker value={moment("2023-04-05", "YYYY-MM-DD")} /> */}
         <Row gutter={[48, 0]}>
           <FormItemWrapper
             colProps={{ span: 8 }}
@@ -132,7 +148,7 @@ export default function ClientDetailsForm({
               name: "educationQualification",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"

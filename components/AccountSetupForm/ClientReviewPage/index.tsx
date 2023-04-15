@@ -12,15 +12,17 @@ import store from "store";
 import { useRouter } from "next/router";
 
 interface ClientReviewPageArgs {
-  prev(): void;
+  prev?(): void;
   formData: any;
   setFormData: (data: any) => void;
+  calledFrom?: "review" | "edit";
 }
 
 export default function ClientReviewPage({
-  prev,
+  prev = () => {},
   formData,
   setFormData,
+  calledFrom = "edit",
 }: ClientReviewPageArgs) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -44,7 +46,9 @@ export default function ClientReviewPage({
         }}
       >
         <AccSetupFormHeading className="mb-4">
-          Review Details and Submit Your Application
+          {calledFrom === "edit"
+            ? "Review Details and Submit Your Application"
+            : "Client Details"}
         </AccSetupFormHeading>
         <div className="mt-6"></div>
         <ClientDetailsForm
@@ -73,22 +77,24 @@ export default function ClientReviewPage({
           calledFrom="review"
         />
         {/* <ClientNomineeForm formData={formData} setFormData={setFormData} calledFrom="review" /> */}
-        <div className="mt-6">
-          <PageBottomButtons
-            cancelBtnProps={{
-              loading: false,
-              onClick: () => {
-                prev();
-              },
-            }}
-            saveBtnProps={{
-              loading: loading,
-              htmlType: "submit",
-            }}
-            saveTitle="Submit"
-            cancelTitle="Previous"
-          />
-        </div>
+        {calledFrom === "edit" && (
+          <div className="mt-6">
+            <PageBottomButtons
+              cancelBtnProps={{
+                loading: false,
+                onClick: () => {
+                  prev();
+                },
+              }}
+              saveBtnProps={{
+                loading: loading,
+                htmlType: "submit",
+              }}
+              saveTitle="Submit"
+              cancelTitle="Previous"
+            />
+          </div>
+        )}
       </Form>
     </>
   );

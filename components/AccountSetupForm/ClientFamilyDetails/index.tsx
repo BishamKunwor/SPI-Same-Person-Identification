@@ -2,6 +2,8 @@ import { Form, Input, Row, Select } from "antd";
 import FormItemWrapper from "../../FormItemWrapper";
 import FormLabel from "../../FormLabel";
 import PageBottomButtons from "../../PageBottomButtons";
+import { useEffect } from "react";
+import moment from "moment";
 
 interface ClientFamilyDetailsArgument {
   prev?(): void;
@@ -19,6 +21,18 @@ export default function ClientFamilyDetailsForm({
   calledFrom = "edit",
 }: ClientFamilyDetailsArgument) {
   const isEditable = calledFrom !== "edit";
+  const [form] = Form.useForm();
+  useEffect(() => {
+    if (Object.keys(formData).length > 0) {
+      for (let data in form.getFieldsValue()) {
+        if (data.toLocaleLowerCase().includes("date")) {
+          form.setFieldValue(data, moment(formData[data]));
+        } else {
+          form.setFieldValue(data, formData[data]);
+        }
+      }
+    }
+  }, []);
   return (
     <>
       <Form
@@ -92,7 +106,7 @@ export default function ClientFamilyDetailsForm({
               name: "spouseName",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
@@ -105,7 +119,7 @@ export default function ClientFamilyDetailsForm({
               name: "sonName",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
@@ -118,7 +132,7 @@ export default function ClientFamilyDetailsForm({
               name: "daughterName",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"

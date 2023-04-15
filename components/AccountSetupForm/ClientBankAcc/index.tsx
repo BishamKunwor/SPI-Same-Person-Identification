@@ -3,6 +3,8 @@ import AccSetupFormHeading from "../../AccSetupFormHeading";
 import FormItemWrapper from "../../FormItemWrapper";
 import FormLabel from "../../FormLabel";
 import PageBottomButtons from "../../PageBottomButtons";
+import { useEffect } from "react";
+import moment from "moment";
 
 interface ClientBankAccArgs {
   prev?(): void;
@@ -20,6 +22,18 @@ export default function ClientBankAccForm({
   formData,
 }: ClientBankAccArgs) {
   const isEditable = calledFrom !== "edit";
+  const [form] = Form.useForm();
+  useEffect(() => {
+    if (Object.keys(formData).length > 0) {
+      for (let data in form.getFieldsValue()) {
+        if (data.toLocaleLowerCase().includes("date")) {
+          form.setFieldValue(data, moment(formData[data]));
+        } else {
+          form.setFieldValue(data, formData[data]);
+        }
+      }
+    }
+  }, []);
   return (
     <>
       <Form
@@ -87,7 +101,7 @@ export default function ClientBankAccForm({
               name: "bankName",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Select from dropdown"
@@ -100,7 +114,7 @@ export default function ClientBankAccForm({
               name: "branchName",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Select from dropdown"

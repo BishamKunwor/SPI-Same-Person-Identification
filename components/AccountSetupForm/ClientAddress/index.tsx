@@ -2,6 +2,8 @@ import { Form, Input, Row, Select } from "antd";
 import FormItemWrapper from "../../FormItemWrapper";
 import FormLabel from "../../FormLabel";
 import PageBottomButtons from "../../PageBottomButtons";
+import { useEffect } from "react";
+import moment from "moment";
 
 interface ClientAddressArguments {
   prev?(): void;
@@ -19,9 +21,22 @@ export default function ClientAddressForm({
   formData,
 }: ClientAddressArguments) {
   const isEditable = calledFrom !== "edit";
+  useEffect(() => {
+    if (Object.keys(formData).length > 0) {
+      for (let data in form.getFieldsValue()) {
+        if (data.toLocaleLowerCase().includes("date")) {
+          form.setFieldValue(data, moment(formData[data]));
+        } else {
+          form.setFieldValue(data, formData[data]);
+        }
+      }
+    }
+  }, []);
+  const [form] = Form.useForm();
   return (
     <>
       <Form
+        form={form}
         onFinish={(data) => {
           console.log(data);
           setFormData({ ...data, ...formData });
@@ -124,7 +139,7 @@ export default function ClientAddressForm({
               name: "gaupalikaNagarpalika",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
@@ -137,7 +152,7 @@ export default function ClientAddressForm({
               name: "wardNo",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
@@ -150,7 +165,7 @@ export default function ClientAddressForm({
               name: "tole",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
@@ -224,7 +239,7 @@ export default function ClientAddressForm({
               name: "currentGaupalika",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
@@ -237,7 +252,7 @@ export default function ClientAddressForm({
               name: "currentWardNo",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
@@ -250,7 +265,7 @@ export default function ClientAddressForm({
               name: "currentTole",
             }}
           >
-            <Select
+            <Input
               disabled={isEditable}
               size="large"
               placeholder="Enter your first name"
