@@ -146,6 +146,12 @@ export default function KycVerification() {
                 onClick={() => {
                   // console.log(record);
                   setSpiData([]);
+                  setActiveUserDetails((data) => {
+                    if (data === record) {
+                      return data;
+                    }
+                    return record;
+                  });
                   const duplicates = SpiChecker(record) as [];
                   if (duplicates.length > 0) {
                     message.warning(
@@ -281,7 +287,7 @@ export default function KycVerification() {
         onCancel={() => setShowAllUserModal(false)}
       >
         <div className="mt-8 mb-4 text-xl font-bold text-green-800">
-          All Users In Database Info
+          {allDbData.length} Users In Database
         </div>
         <TableWrapper
           columns={[
