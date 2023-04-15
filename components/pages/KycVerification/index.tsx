@@ -10,8 +10,8 @@ import SpiChecker from "../../../spi-core";
 export default function KycVerification() {
   const [dataSource, setDataSource] = useState([]);
   const [showUserDetailsModal, setShowUserDetailsModal] = useState(false);
-  const [activeUserDetails, setActiveUserDetails] = useState({});
-  const [activeSpiUserDetails, setActiveSpiUserDetails] = useState({});
+  const [activeUserDetails, setActiveUserDetails] = useState({}) as any;
+  const [activeSpiUserDetails, setActiveSpiUserDetails] = useState({}) as any;
   const [showSpiDiffModel, setShowSpiDiffModel] = useState(false);
   const [spiData, setSpiData] = useState([]);
   const [showAllUserModal, setShowAllUserModal] = useState(false);
@@ -125,7 +125,7 @@ export default function KycVerification() {
           <div className="flex gap-4 flex-wrap">
             <Button
               onClick={() => {
-                setActiveUserDetails((data) => {
+                setActiveUserDetails((data: any) => {
                   if (data === record) {
                     return data;
                   }
@@ -148,7 +148,7 @@ export default function KycVerification() {
                 onClick={() => {
                   // console.log(record);
                   setSpiData([]);
-                  setActiveUserDetails((data) => {
+                  setActiveUserDetails((data: any) => {
                     if (data === record) {
                       return data;
                     }
@@ -477,7 +477,7 @@ export default function KycVerification() {
                       //   });
                       // }}
                       onClick={() => {
-                        setActiveUserDetails((data) => {
+                        setActiveUserDetails((data: any) => {
                           if (data === record) {
                             return data;
                           }
