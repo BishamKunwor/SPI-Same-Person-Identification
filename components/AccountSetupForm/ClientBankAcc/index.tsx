@@ -37,6 +37,7 @@ export default function ClientBankAccForm({
   return (
     <>
       <Form
+        form={form}
         onFinish={(data) => {
           console.log(data);
           setFormData({ ...data, ...formData });

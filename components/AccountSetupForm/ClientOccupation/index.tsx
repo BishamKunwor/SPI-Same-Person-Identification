@@ -36,6 +36,7 @@ export default function ClientOccupationForm({
   return (
     <>
       <Form
+        form={form}
         onFinish={(data) => {
           console.log(data);
           setFormData({ ...data, ...formData });

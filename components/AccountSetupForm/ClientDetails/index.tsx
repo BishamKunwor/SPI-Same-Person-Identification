@@ -45,7 +45,7 @@ export default function ClientDetailsForm({
         form={form}
         onFinish={(data) => {
           console.log(data);
-          setFormData({ ...data, ...formData });
+          setFormData(JSON.parse(JSON.stringify({ ...data, ...formData })));
           next();
         }}
       >

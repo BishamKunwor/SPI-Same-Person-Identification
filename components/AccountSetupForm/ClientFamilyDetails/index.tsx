@@ -36,6 +36,7 @@ export default function ClientFamilyDetailsForm({
   return (
     <>
       <Form
+        form={form}
         onFinish={(data) => {
           console.log(data);
           setFormData({ ...data, ...formData });
