@@ -12,6 +12,15 @@ export default function KycVerification() {
   const [showUserDetailsModal, setShowUserDetailsModal] = useState(false);
   const [activeUserDetails, setActiveUserDetails] = useState({});
   const [spiData, setSpiData] = useState([]);
+  const [showAllUserModal, setShowAllUserModal] = useState(false);
+  const [allDbData, setAllDbData] = useState([]);
+  const [showAllUserIndividualModal, setShowAllUserIndividualModal] =
+    useState(false);
+
+  const updateDbData = () => {
+    const usersInfoDb = store.get("usersInfo");
+    setAllDbData(usersInfoDb);
+  };
 
   useEffect(() => {
     const createDematStoreData = store.get("createDematAccount");
@@ -110,18 +119,9 @@ export default function KycVerification() {
       key: "action",
       dataIndex: "action",
       render: (_: any, record: any) => {
-        // console.log(record);
-        // setActiveUserDetails(record);
         return (
           <div className="flex gap-4 flex-wrap">
             <Button
-              // onMouseEnter={() => {
-              //   console.log(activeUserDetails);
-              //   setActiveUserDetails((data) => {
-              //     console.log(data);
-              //     return record;
-              //   });
-              // }}
               onClick={() => {
                 setActiveUserDetails((data) => {
                   if (data === record) {
@@ -255,7 +255,13 @@ export default function KycVerification() {
   return (
     <>
       <div className="flex justify-end items-center">
-        <Button type="primary">
+        <Button
+          type="primary"
+          onClick={() => {
+            updateDbData();
+            setShowAllUserModal(true);
+          }}
+        >
           <span className="px-4">Show All Users In Database</span>
         </Button>
       </div>
@@ -268,6 +274,140 @@ export default function KycVerification() {
         </div>
         <TableWrapper columns={columns} dataSource={dataSource} />
       </div>
+      <Modal
+        open={showAllUserModal}
+        footer={false}
+        width={1300}
+        onCancel={() => setShowAllUserModal(false)}
+      >
+        <div className="mt-8 mb-4 text-xl font-bold text-green-800">
+          All Users In Database Info
+        </div>
+        <TableWrapper
+          columns={[
+            {
+              title: "First Name",
+              key: "firstName",
+              dataIndex: "firstName",
+              render(data: string) {
+                return (
+                  <div className="font-[500] text-sm text-primaryColor">
+                    {data}
+                  </div>
+                );
+              },
+            },
+
+            {
+              title: "Last Name",
+              key: "lastName",
+              dataIndex: "lastName",
+              render(data: string) {
+                return (
+                  <div className="font-[500] text-sm text-primaryColor">
+                    {data}
+                  </div>
+                );
+              },
+            },
+            {
+              title: "Citizenship No.",
+              key: "citizenshipNo",
+              dataIndex: "citizenshipNo",
+              render(data: string) {
+                return (
+                  <div className="font-[500] text-sm text-primaryColor">
+                    {data}
+                  </div>
+                );
+              },
+            },
+            {
+              title: "DOB",
+              key: "dateOfBirthBS",
+              dataIndex: "dateOfBirthBS",
+              render(data: string) {
+                return (
+                  <div className="font-[500] text-sm text-primaryColor">
+                    {moment(data).format("YYYY-MM-DD")}
+                  </div>
+                );
+              },
+            },
+            {
+              title: "Father Name",
+              key: "fatherName",
+              dataIndex: "fatherName",
+              render(data: string) {
+                return (
+                  <div className="font-[500] text-sm text-primaryColor">
+                    {data}
+                  </div>
+                );
+              },
+            },
+            {
+              title: "Grand Father Name",
+              key: "grandFatherName",
+              dataIndex: "grandFatherName",
+              render(data: string) {
+                return (
+                  <div className="font-[500] text-sm text-primaryColor">
+                    {data}
+                  </div>
+                );
+              },
+            },
+            {
+              title: "Action",
+              key: "action",
+              dataIndex: "action",
+              render: (_: any, record: any) => {
+                // console.log(record);
+                // setActiveUserDetails(record);
+                return (
+                  <div className="flex gap-4 flex-wrap">
+                    <Button
+                      // onMouseEnter={() => {
+                      //   console.log(activeUserDetails);
+                      //   setActiveUserDetails((data) => {
+                      //     console.log(data);
+                      //     return record;
+                      //   });
+                      // }}
+                      onClick={() => {
+                        setActiveUserDetails((data) => {
+                          if (data === record) {
+                            return data;
+                          }
+                          return record;
+                        });
+                        setShowAllUserIndividualModal(true);
+                      }}
+                    >
+                      View Details
+                    </Button>
+                  </div>
+                );
+              },
+            },
+          ]}
+          dataSource={allDbData}
+        />
+        <Modal
+          width={1200}
+          open={showAllUserIndividualModal}
+          footer={false}
+          onCancel={() => setShowAllUserIndividualModal(false)}
+        >
+          <ClientReviewPage
+            calledFrom="review"
+            formData={activeUserDetails}
+            setFormData={() => {}}
+          />
+        </Modal>
+      </Modal>
+
       <Modal
         width={1200}
         open={showUserDetailsModal}
