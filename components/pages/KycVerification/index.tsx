@@ -1,13 +1,10 @@
 import { Button, Col, ConfigProvider, Input, Modal } from "antd";
-import Link from "next/link";
-import { magnifyingGlassIcon } from "../../../public/icons";
-import { tableActionRender } from "../../../utils";
-import BtnWithIcon from "../../Btn/BtnWithIcon";
 import TableWrapper from "../../TableWrapper";
 import { useEffect, useState } from "react";
 import store from "store";
 import ClientReviewPage from "../../AccountSetupForm/ClientReviewPage";
 import moment from "moment";
+import NormalBtn from "../../Btn/BtnNormal";
 
 export default function KycVerification() {
   const [dataSource, setDataSource] = useState([]);
@@ -21,7 +18,16 @@ export default function KycVerification() {
         setActiveUserDetails(createDematStoreData[0]);
       }
     }
-  });
+  }, []);
+
+  const onAddIntoDatabase = () => {
+    console.log(activeUserDetails);
+  };
+
+  const onRejectUserApplication = () => {
+    console.log(activeUserDetails);
+  };
+
   const columns = [
     {
       title: "First Name",
@@ -92,11 +98,24 @@ export default function KycVerification() {
       dataIndex: "action",
       render: (_: any, record: any) => {
         // console.log(record);
-        setActiveUserDetails(record);
+        // setActiveUserDetails(record);
         return (
           <div className="flex gap-4 flex-wrap">
             <Button
+              // onMouseEnter={() => {
+              //   console.log(activeUserDetails);
+              //   setActiveUserDetails((data) => {
+              //     console.log(data);
+              //     return record;
+              //   });
+              // }}
               onClick={() => {
+                setActiveUserDetails((data) => {
+                  if (data === record) {
+                    return data;
+                  }
+                  return record;
+                });
                 setShowUserDetailsModal(true);
               }}
             >
@@ -134,10 +153,10 @@ export default function KycVerification() {
       </div>
       <div className="pt-8 flex flex-col space-y-4">
         <div className="flex justify-between">
-          <div className="text-xl font-bold text-black/80">Verify KYC Form</div>
-          <Col span={4}>
+          <div className="text-lg font-bold text-black/80">Verify KYC Form</div>
+          {/* <Col span={4}>
             <Input prefix={magnifyingGlassIcon} />
-          </Col>
+          </Col> */}
         </div>
         <TableWrapper columns={columns} dataSource={dataSource} />
       </div>
@@ -147,6 +166,33 @@ export default function KycVerification() {
         footer={false}
         onCancel={() => setShowUserDetailsModal(false)}
       >
+        <div className="rounded-lg bg-gray-800 my-6 p-2 px-4">
+          <div className="text-white font-bold text-2xl">
+            Verify Details and Add User to the Database
+          </div>
+          <div className="flex gap-8 justify-end">
+            <NormalBtn
+              tokenConfig={{
+                controlHeight: 30,
+                colorPrimary: "#3a86ff",
+                colorBorder: "#3a86ff",
+              }}
+              btnProps={{ type: "primary", onClick: onAddIntoDatabase }}
+              title={<p className="px-2 font-medium text-white">Accept</p>}
+              titleColor={"primary"}
+            />
+            <NormalBtn
+              tokenConfig={{
+                controlHeight: 30,
+                colorPrimary: "#d00000",
+                colorBorder: "#d00000",
+              }}
+              btnProps={{ type: "primary", onClick: onRejectUserApplication }}
+              title={<p className="px-2 font-medium text-white">Reject</p>}
+              titleColor={"primary"}
+            />
+          </div>
+        </div>
         <ClientReviewPage
           calledFrom="review"
           formData={activeUserDetails}
