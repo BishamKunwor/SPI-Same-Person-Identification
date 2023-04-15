@@ -1,4 +1,4 @@
-import { Button, Col, ConfigProvider, Input, Modal } from "antd";
+import { Button, Col, ConfigProvider, Input, Modal, message } from "antd";
 import TableWrapper from "../../TableWrapper";
 import { useEffect, useState } from "react";
 import store from "store";
@@ -24,11 +24,21 @@ export default function KycVerification() {
   }, []);
 
   const onAddIntoDatabase = () => {
-    console.log(activeUserDetails);
+    const usersInfoDb = store.get("usersInfo");
+    usersInfoDb.push(activeUserDetails);
+    store.set("usersInfo", usersInfoDb);
+    onRejectUserApplication("added");
+    setSpiData([]);
   };
 
-  const onRejectUserApplication = () => {
-    console.log(activeUserDetails);
+  const onRejectUserApplication = (type: string) => {
+    const filteredData = dataSource.filter(
+      (data) => data !== activeUserDetails
+    );
+    setDataSource([...filteredData]);
+    setShowUserDetailsModal(false);
+    store.set("createDematAccount", filteredData);
+    message.success(`Successfully ${type} User's Record`);
   };
 
   const columns = [
@@ -135,7 +145,18 @@ export default function KycVerification() {
                 type="primary"
                 onClick={() => {
                   // console.log(record);
-                  setSpiData(SpiChecker(record) as []);
+                  setSpiData([]);
+                  const duplicates = SpiChecker(record) as [];
+                  if (duplicates.length > 0) {
+                    message.warning(
+                      `Found ${duplicates.length} that needs your attention`
+                    );
+                  } else {
+                    message.success("No Duplicated Found");
+                  }
+                  setTimeout(() => {
+                    setSpiData(duplicates);
+                  }, 500);
                 }}
               >
                 Run SPI Check
@@ -214,7 +235,6 @@ export default function KycVerification() {
       key: "grandFatherName",
       dataIndex: "grandFatherName",
       render(data: string, record: any) {
-        console.log(record);
         return (
           <div className="font-[500] text-sm text-primaryColor">
             {record.suspectedRecord.grandFatherName}
@@ -227,7 +247,6 @@ export default function KycVerification() {
       key: "percentage",
       dataIndex: "percentage",
       render(data: string, record: any) {
-        console.log(record);
         return <div className="text-sm text-red-500 font-bold">{data}</div>;
       },
     },
@@ -276,7 +295,10 @@ export default function KycVerification() {
                 colorPrimary: "#d00000",
                 colorBorder: "#d00000",
               }}
-              btnProps={{ type: "primary", onClick: onRejectUserApplication }}
+              btnProps={{
+                type: "primary",
+                onClick: () => onRejectUserApplication("removed"),
+              }}
               title={<p className="px-2 font-medium text-white">Reject</p>}
               titleColor={"primary"}
             />
