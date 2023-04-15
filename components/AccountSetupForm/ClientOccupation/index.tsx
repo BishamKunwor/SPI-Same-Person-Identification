@@ -32,7 +32,7 @@ export default function ClientOccupationForm({
         }
       }
     }
-  }, []);
+  });
   return (
     <>
       <Form

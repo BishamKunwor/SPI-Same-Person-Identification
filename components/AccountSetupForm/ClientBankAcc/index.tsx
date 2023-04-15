@@ -33,7 +33,7 @@ export default function ClientBankAccForm({
         }
       }
     }
-  }, []);
+  });
   return (
     <>
       <Form

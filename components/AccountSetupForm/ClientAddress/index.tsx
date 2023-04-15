@@ -31,7 +31,7 @@ export default function ClientAddressForm({
         }
       }
     }
-  }, []);
+  });
   const [form] = Form.useForm();
   return (
     <>

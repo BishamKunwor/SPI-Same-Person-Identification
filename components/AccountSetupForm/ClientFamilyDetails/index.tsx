@@ -32,7 +32,7 @@ export default function ClientFamilyDetailsForm({
         }
       }
     }
-  }, []);
+  });
   return (
     <>
       <Form
