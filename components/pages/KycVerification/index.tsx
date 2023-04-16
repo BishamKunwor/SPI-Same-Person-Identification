@@ -313,7 +313,7 @@ export default function KycVerification() {
               <div className="">
                 <img
                   className="h-48 w-48 border"
-                  src={activeSpiUserDetails.passportSizePhoto}
+                  src={activeSpiUserDetails.applicantSignature}
                   alt=""
                 />
                 <div className="mt-2 font-semibold">Signature</div>
@@ -341,7 +341,7 @@ export default function KycVerification() {
               <div className="">
                 <img
                   className="h-48 w-48 border"
-                  src={activeUserDetails.passportSizePhoto}
+                  src={activeUserDetails.applicantSignature}
                   alt=""
                 />
                 <div className="mt-2 font-semibold">Signature</div>
